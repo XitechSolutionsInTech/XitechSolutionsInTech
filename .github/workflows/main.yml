@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
-        uses: actions/checkout@v3 # Atualizado para v3
+        uses: actions/checkout@v3
 
       - name: Gerar Animação da Cobrinha
-        uses: Platane/snk@v3 # Atualizado para v3
+        uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
 
-            name: Commitar e enviar mudanças
-              uses: EndBug/add-and-commit@v9
-              with:
-                add: 'dist/github-snake*.svg'
-                message: 'Atualizar animação da cobrinha'
-                branch: ${{ github.ref_name }}
-                github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commitar e enviar mudanças
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'dist/github-snake*.svg'
+          message: 'Atualizar animação da cobrinha'
+          branch: ${{ github.ref_name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
