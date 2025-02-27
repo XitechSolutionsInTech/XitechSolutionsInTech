@@ -41,3 +41,6 @@ Para mais informações, entre em contato conosco:
 [![instagram](https://img.icons8.com/fluency/48/instagram-new.png)](https://www.instagram.com/xitechst/)
 [![whatsapp](https://img.icons8.com/color/48/whatsapp--v1.png)](https://bit.ly/3wVtGaV)
 
+<div align="center">
+  <img src="dist/github-snake.svg" alt="github-snake" />
+</div>
