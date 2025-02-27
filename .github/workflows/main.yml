@@ -1,0 +1,34 @@
+name: Gerar Animação da Cobrinha
+
+on:
+  schedule:
+    - cron: '*/12 * * * *' # Executa a cada 12 horas
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3 # Atualizado para v3
+
+      - name: Gerar Animação da Cobrinha
+        uses: Platane/snk@v3 # Atualizado para v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
+
+      - name: Commitar e enviar mudanças
+        uses: stefanzweifel/git-auto-commit-action@v4 # Usando uma ação mais confiável
+        with:
+          commit_message: 'Atualizar animação da cobrinha'
+          branch: ${{ github.ref_name }} # Garante que a branch correta seja usada
+          file_pattern: dist/github-snake*.svg
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
