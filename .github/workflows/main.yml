@@ -20,12 +20,13 @@ jobs:
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
 
-      - name: Commitar e enviar mudanças
-        uses: stefanzweifel/git-auto-commit-action@v4 # Usando uma ação mais confiável
-        with:
-          commit_message: 'Atualizar animação da cobrinha'
-          branch: ${{ github.ref_name }} # Garante que a branch correta seja usada
-          file_pattern: dist/github-snake*.svg
+            name: Commitar e enviar mudanças
+              uses: EndBug/add-and-commit@v9
+              with:
+                add: 'dist/github-snake*.svg'
+                message: 'Atualizar animação da cobrinha'
+                branch: ${{ github.ref_name }}
+                github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
